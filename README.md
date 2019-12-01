@@ -17,6 +17,7 @@ in the inventory file variable like:
     Users:
       - name: "default"
         updatePassword: "always"
+        uid: 1501
 
 
 Role Variables
