@@ -1,0 +1,23 @@
+---
+
+# Create users
+- name: Create users
+  user:
+    name: "{{ item.name }}"
+    update_password: "{{ item.updatePassword | default('on_create') }}"
+    uid: "{{ item.uid | default(omit) }}"
+    password: "{{ 'userPassword' | password_hash('sha512', 'saltPassword') }}"
+    state: present
+  with_items:
+    - "{{ Users }}"
+
+# Create ssh folders
+- name: Create ssh folders for the users.
+  file:
+    group: "{{ item.name }}"
+    mode: "0700"
+    owner: "{{ item.name }}"
+    path: "/home/{{ item.name }}/.ssh"
+    state: directory
+  with_items:
+    - "{{ Users }}"

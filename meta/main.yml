@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  role_name: users
+  author: Gino Jansen
+  description: Configure user accounts on different operating systems
+  license: license (BSD, MIT)
+  platforms:
+    - name: Centos
+      versions:
+        - 6
+        - 7
+        - 8
+
+  min_ansible_version: 1.2
+
+  galaxy_tags:
+    - users
+
+dependencies: []

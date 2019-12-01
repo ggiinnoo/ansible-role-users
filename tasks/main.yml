@@ -1,0 +1,15 @@
+---
+
+# Generate a random password and salt.
+- name: Generate user password
+  set_fact:
+    userPassword: "{{ lookup('password', '/dev/null chars=ascii_letters length=15') }}"
+
+- name: Generate salt password
+  set_fact:
+    saltPassword: "{{ lookup('password', '/dev/null chars=ascii_letters length=15') }}"
+
+# Include CentOS based user installation
+- name: Include CentOS
+  include_tasks: CentOS.yml
+  when: ansible_distribution == "CentOS"

@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  roles:
+    - ansible-role-users
+
+  vars:
+    Users:
+      - name: "test"
+        updatePassword: "always"
