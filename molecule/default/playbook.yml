@@ -9,4 +9,5 @@
   vars:
     Users:
       - name: "test"
+        env: "prod"
         updatePassword: "always"

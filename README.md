@@ -1,12 +1,11 @@
 Setup user account
 =========
 
-Used to setup user accounts on the server
+Setup user account's 
 
 TODO
 ----
 When logging in as user. See information like what domains are installed. A custom message?
-using the .bash_profile to set the env like production dev etc
 
 Requirements
 ------------
@@ -16,6 +15,7 @@ in the inventory file variable like:
     #Define server user name
     Users:
       - name: "default"
+        env: production
         updatePassword: "always"
         uid: 1501
 
@@ -23,7 +23,12 @@ in the inventory file variable like:
 Role Variables
 --------------
 
-None
+The following varriables are available:
+name Required
+env default is empty
+updatePassword default is to omit
+uid default is to omit
+
 
 Dependencies
 ------------
@@ -34,9 +39,9 @@ Example Playbook
 ----------------
 
     - name: Setup users
-      hosts: groupWeb
+      hosts: all
       roles:
-        - users
+        - ggiinnoo.users
 
 License
 -------
