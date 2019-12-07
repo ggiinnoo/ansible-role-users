@@ -8,6 +8,18 @@
 
   vars:
     Users:
-      - name: "test"
-        env: "prod"
+      - name: "default"
+        env: production
         updatePassword: "always"
+        uid: 1501
+        folderStructure:
+          - file: deployments/current
+            state: directory
+            mode: "0777"
+      - name: "default2"
+        env: "dev"
+      - name: "default3"
+        folderStructure:
+          - file: deployments/current
+            state: directory
+            mode: "0777"
