@@ -10,25 +10,34 @@ When logging in as user. See information like what domains are installed. A cust
 Requirements
 ------------
 
-in the inventory file variable like:
-
-    #Define server user name
-    Users:
-      - name: "default"
-        env: production
-        updatePassword: "always"
-        uid: 1501
+There are no requirements as of yet
 
 
 Role Variables
 --------------
 
-The following varriables are available:
-name Required
-env default is empty
-updatePassword default is to omit
-uid default is to omit
+A complete user with all features would look like this:
 
+```
+Users:
+  - name: "default"
+    env: production
+    updatePassword: "always"
+    uid: 1501
+    folderStructure:
+      - file: deployments/current
+        state: directory
+        mode: "0777"
+```
+
+The only variable that has to be filled is the `name` var:
+
+```
+Users:
+  - name: "default"
+```
+
+The rest is optional.
 
 Dependencies
 ------------

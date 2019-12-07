@@ -13,3 +13,7 @@
 - name: Include CentOS
   include_tasks: CentOS.yml
   when: ansible_distribution == "CentOS"
+
+# Configure a folder structure inside the user
+- name: include folder structure
+  include: folderStructure.yml

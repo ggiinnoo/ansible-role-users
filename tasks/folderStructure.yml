@@ -1,0 +1,15 @@
+---
+
+# Generate folder structure for users.
+- name: Generate folder structure
+  file:
+    path: "/home/{{ item.0.name }}/{{ item.1.file }}"
+    state: "{{ item.1.state }}"
+    owner: "{{ item.0.name }}"
+    group: "{{ item.0.name }}"
+    mode: "{{ item.1.mode | default('0711') }}"
+  with_subelements:
+    - "{{ Users }}"
+    - folderStructure
+    - flags:
+      skip_missing: true
