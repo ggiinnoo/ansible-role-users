@@ -1,4 +1,4 @@
-{{ ansible_managed }}
+# {{ ansible_managed }}
 {% if 'prod' in item.env | default(omit) %}
 export PS1="\[\e[0;37m\][ \[\e[0;32m\]Production \[\e[0;37m\]] \[\e[0;37m\] \[\e[0;37m\]\u \[\e[0;37m\]@ \[\e[0;37m\]\H \[\e[0;37m\]> \[\e[0;37m\]\w \[\e[0;37m\]: \[\e[0m\]"
 {% elif 'acc' in item.env | default(omit) %}	
