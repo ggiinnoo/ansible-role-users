@@ -11,6 +11,16 @@
   with_items:
     - "{{ Users }}"
 
+- name: Set user folder permissions
+  file:
+    path: "/home/{{ item.name }}"
+    state: directory
+    mode: "{{ item.mode | default('0711') }}"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+  with_items:
+    - "{{ Users }}"
+
 # Create ssh folders
 - name: Create ssh folders for the users.
   file:
