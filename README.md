@@ -24,6 +24,7 @@ Users:
     env: production
     updatePassword: "always"
     uid: 1501
+    mode: 0711
     folderStructure:
       - file: deployments/current
         state: directory
