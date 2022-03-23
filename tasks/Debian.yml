@@ -1,0 +1,7 @@
+---
+
+- name: Users | Debian | Configure users
+  include_tasks: Debian/configure.yml
+
+- name: Users | Debian | Configure folders
+  include_tasks: Debian/folders.yml
