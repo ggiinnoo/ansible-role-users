@@ -1,7 +1,7 @@
 ---
 
 # Create users
-- name: Create users
+- name: Users | RedHat | Create users
   user:
     name: "{{ item.name }}"
     update_password: "{{ item.updatePassword | default('on_create') }}"
@@ -10,8 +10,10 @@
     state: present
   with_items:
     - "{{ Users }}"
+  loop_control:
+    label: "Creating user: {{ item.name }}"
 
-- name: Set user folder permissions
+- name: Users | RedHat | Set user folder permissions
   file:
     path: "/home/{{ item.name }}"
     state: directory
@@ -20,9 +22,11 @@
     group: "{{ item.name }}"
   with_items:
     - "{{ Users }}"
+  loop_control:
+    label: "Set user folder permissions for: {{ item.name }}"
 
 # Create ssh folders
-- name: Create ssh folders for the users.
+- name: Users | RedHat | Create ssh folders for the users.
   file:
     group: "{{ item.name }}"
     mode: "0700"
@@ -31,9 +35,11 @@
     state: directory
   with_items:
     - "{{ Users }}"
+  loop_control:
+    label: "Create '.ssh' folder for user: {{ item.name }}"
 
 # Place custom bash_profile
-- name: Custom bash_profile script
+- name: Users | RedHat | Custom bash_profile script
   template:
     dest: "/home/{{ item.name }}/.bash_profile"
     group: "{{ item.name }}"
@@ -41,3 +47,5 @@
     mode: "644"
     src: "templates/.bash_profile.j2"
   with_items: "{{ Users }}"
+  loop_control:
+    label: "Place custom bash script for user: {{ item.name }}"
