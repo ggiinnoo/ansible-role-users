@@ -1,0 +1,51 @@
+---
+
+# Create users
+- name: Users | RedHat | Create users
+  user:
+    name: "{{ item.name }}"
+    update_password: "{{ item.updatePassword | default('on_create') }}"
+    uid: "{{ item.uid | default(omit) }}"
+    password: "{{ 'userPassword' | password_hash('sha512', 'saltPassword') }}"
+    state: present
+  with_items:
+    - "{{ Users }}"
+  loop_control:
+    label: "Creating user: {{ item.name }}"
+
+- name: Users | RedHat | Set user folder permissions
+  file:
+    path: "/home/{{ item.name }}"
+    state: directory
+    mode: "{{ item.mode | default('0711') }}"
+    owner: "{{ item.name }}"
+    group: "{{ item.name }}"
+  with_items:
+    - "{{ Users }}"
+  loop_control:
+    label: "Set user folder permissions for: {{ item.name }}"
+
+# Create ssh folders
+- name: Users | RedHat | Create ssh folders for the users.
+  file:
+    group: "{{ item.name }}"
+    mode: "0700"
+    owner: "{{ item.name }}"
+    path: "/home/{{ item.name }}/.ssh"
+    state: directory
+  with_items:
+    - "{{ Users }}"
+  loop_control:
+    label: "Create '.ssh' folder for user: {{ item.name }}"
+
+# Place custom bash_profile
+- name: Users | RedHat | Custom bash_profile script
+  template:
+    dest: "/home/{{ item.name }}/.bash_profile"
+    group: "{{ item.name }}"
+    owner: "{{ item.name }}"
+    mode: "644"
+    src: "templates/.bash_profile.j2"
+  with_items: "{{ Users }}"
+  loop_control:
+    label: "Place custom bash script for user: {{ item.name }}"

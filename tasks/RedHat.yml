@@ -1,0 +1,7 @@
+---
+
+- name: Users | RedHat | Configure users
+  include_tasks: RedHat/configure.yml
+
+- name: Users | RedHat | Configure folders
+  include_tasks: RedHat/folders.yml

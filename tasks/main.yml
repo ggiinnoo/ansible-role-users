@@ -1,19 +1,15 @@
 ---
 
-# Generate a random password and salt.
-- name: Generate user password
+- name: Users | Generate password
   set_fact:
     userPassword: "{{ lookup('password', '/dev/null chars=ascii_letters length=15') }}"
 
-- name: Generate salt password
+- name: Users | Generate salt encode
   set_fact:
     saltPassword: "{{ lookup('password', '/dev/null chars=ascii_letters length=15') }}"
 
-# Include CentOS based user installation
-- name: Include CentOS
-  include_tasks: CentOS.yml
-  when: ansible_distribution == "CentOS"
+- name: Users | Include OS variables
+  include_vars: '{{ ansible_os_family }}.yml'
 
-# Configure a folder structure inside the user
-- name: include folder structure
-  include: folderStructure.yml
+- name: Users | Include OS installation
+  include_tasks: '{{ ansible_os_family }}.yml'
