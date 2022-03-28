@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: users
+  namespace: ggiinnoo
   author: Gino Jansen
   description: Configure user accounts on different operating systems
   license: license (BSD, MIT)
