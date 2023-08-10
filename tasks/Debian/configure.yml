@@ -7,6 +7,7 @@
     update_password: "{{ item.updatePassword | default('on_create') }}"
     uid: "{{ item.uid | default(omit) }}"
     password: "{{ 'userPassword' | password_hash('sha512', 'saltPassword') }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
     state: present
   with_items:
     - "{{ Users }}"
